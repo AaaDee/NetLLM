@@ -1,12 +1,19 @@
 ### Runs the adaptive bitrate streaming test code with a llm model checkpoint
-# Install Anaconda to manage conda environments (if necessary)
-wget https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh
-bash Anaconda3-5.1.0-Linux-x86_64.sh -b
-. ~/anaconda3/bin/activate
+srun --interactive -c4 --mem=32G -G4 -t04:00:00 -pgpu-oversub -M ukko --pty bash
+cd /turso/wrk-vakka/users/aarneris/NetLLM
 
-cd /wrk-vakka/users/aarneris/NetLLM/NetLLM/adaptive_bitrate_streaming
+### Install Anaconda to manage conda environments (if necessary)
+# Needed as conda uses the home path for some operations
+export HOME=/turso/wrk-vakka/users/aarneris/NetLLM
+cd miniconda3
+# download miniconda installer if not loaded yet
+# wget https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -u -b
+. bin/activate
+
+cd /turso/wrk-vakka/users/aarneris/NetLLM/NetLLM/adaptive_bitrate_streaming
 conda env create -f environment.yaml
-source activate abr_netllm
+conda activate vp_netllm
 
 pip install -r requirements.txt
 # Has to be installed separately due to a dependency conflict
