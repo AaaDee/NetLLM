@@ -44,7 +44,7 @@ def load_model(args, model, model_dir):
         # load low rank matrices
         model.plm.load_adapter(model_dir, adapter_name='default')
         # load other modules except plm
-        model.embedding_model.modules_except_plm.load_state_dict(torch.load(os.path.join(model_dir, 'modules_except_plm.bin')))
+        model.embedding_model.modules_except_plm.load_state_dict(torch.load(os.path.join(model_dir, 'modules_except_plm.bin'), map_location=args.device))
     else:
         # low rank matrices are disabled, load whole model
         model.load_state_dict(torch.load(os.path.join(model_dir, 'model.bin')))
