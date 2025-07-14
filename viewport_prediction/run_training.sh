@@ -9,7 +9,7 @@
 #SBATCH --time=48:00:00
 
 
-### Runs the adaptive bitrate streaming test code with a llm model checkpoint
+### Finetunes the viewport preciction model
 cd /turso/wrk-vakka/users/aarneris/NetLLM
 
 ### Install Anaconda to manage conda environments (if necessary)
