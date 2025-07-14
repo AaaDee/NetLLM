@@ -1,6 +1,6 @@
 ### Runs the adaptive bitrate streaming test code with a llm model checkpoint
 
-srun --interactive -c4 --mem=32G -G4 -t04:00:00 -pgpu-oversub -M ukko --pty bash
+srun --interactive -c4 --mem=4G -t04:00:00 -pgpu-oversub -M ukko --pty bash
 cd /turso/wrk-vakka/users/aarneris/NetLLM
 
 ### Install Anaconda to manage conda environments (if necessary)
@@ -26,4 +26,6 @@ python run_old.py --test --test-dataset Jin2022 --his-window 10 --fut-window 20 
 # Copy files back to local
 rsync -av --progress -e "ssh -A aarneris@pangolin.it.helsinki.fi ssh" aarneris@turso.cs.helsinki.fi:/wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport_prediction/data/results/llama_base/ .
 
+0 */6 * * * /wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport-prediction/training_cron.sh
 
+*/5 * * * * /wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport-prediction/cron_test.sh

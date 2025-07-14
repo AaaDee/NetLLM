@@ -23,3 +23,5 @@ python -m pip install torch==1.10.2
 # Test command as presented in the NetLLM repository
 # Note that you will need the model checkpoint downloaded separately, please see instructions in the abr repository
 python run_plm.py --test --plm-type llama --plm-size base --rank 128 --device cuda:0 --model-dir  data/ft_plms/try_llama2_7b
+
+
