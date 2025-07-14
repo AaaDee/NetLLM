@@ -24,8 +24,4 @@ pip install huggingface-hub==0.23.0 --no-dependencies
 python run_old.py --test --test-dataset Jin2022 --his-window 10 --fut-window 20 --plm-type llama --plm-size base --epochs 40 --bs 1 --lr 0.0002 --grad-accum-steps 32 --device cuda:0 --steps-per-valid 5000 --save-checkpoint-per-epoch 1 --rank 32 --scheduled-sampling --model-path data/ft_plms/try_llama2_7b
 
 # Copy files back to local
-rsync -av --progress -e "ssh -A aarneris@pangolin.it.helsinki.fi ssh" aarneris@turso.cs.helsinki.fi:/wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport_prediction/data/results/llama_base/ .
-
-0 */6 * * * /wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport-prediction/training_cron.sh
-
-*/5 * * * * /wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport-prediction/cron_test.sh
+# rsync -av --progress -e "ssh -A aarneris@pangolin.it.helsinki.fi ssh" aarneris@turso.cs.helsinki.fi:/wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport_prediction/data/results/llama_base/ .
