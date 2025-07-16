@@ -4,7 +4,7 @@
 #SBATCH  -M ukko
 #SBATCH  -p gpu
 #SBATCH --cpus-per-gpu=2
-#SBATCH -G=1
+#SBATCH -G1
 #SBATCH --mem-per-cpu=8000
 #SBATCH --time=48:00:00
 
