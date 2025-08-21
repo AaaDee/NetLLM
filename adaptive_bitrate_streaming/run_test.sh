@@ -1,5 +1,5 @@
 ### Runs the adaptive bitrate streaming test code with a llm model checkpoint
-srun --interactive -c4 --mem=32G -G4 -t04:00:00 -pgpu-oversub -M ukko --pty bash
+srun --interactive -c4 --mem=32G -G1 -t04:00:00 -pgpu-oversub -M ukko --pty bash
 cd /turso/wrk-vakka/users/aarneris/NetLLM
 
 ### Install Anaconda to manage conda environments (if necessary)
