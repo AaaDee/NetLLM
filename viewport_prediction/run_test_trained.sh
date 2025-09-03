@@ -1,4 +1,4 @@
-### Runs the viewport prediction test code with a llm model checkpoint
+### Runs the viewport prediction test code with a self-trained llm model checkpoint
 
 srun --interactive -c4 --mem=4G -t04:00:00 -pgpu-oversub -M ukko --pty bash
 cd /turso/wrk-vakka/users/aarneris/NetLLM
