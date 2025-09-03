@@ -246,6 +246,9 @@ def run(args):
         os.makedirs(models_dir)
     if not os.path.exists(results_dir):
         os.makedirs(results_dir)
+    details_dir = results_dir.replace('results', 'details')
+    if not os.path.exists(details_dir):
+        os.makedirs(details_dir)
     # args.device_out and args.device_mid are used used for model parallelism (currently only necessary for llama) 
     # For data/modules near the input side, we use args.device.
     # For data/modules near the output side, we use args.device_out.

@@ -81,7 +81,7 @@ class ResultNotebook:
             print('Results saved at', result_path)
             file.close()
         
-        details_path = result_path.replace('result_', 'details_')
+        details_path = result_path.replace('results', 'details')
         with open(details_path, 'w') as file:
             for i in range(len(total_pred)):
                 pred_line = 'pred: '
