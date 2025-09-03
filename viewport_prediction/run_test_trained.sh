@@ -20,9 +20,8 @@ pip install -r requirements.txt
 # Has to be installed separately due to a dependency conflict
 pip install huggingface-hub==0.23.0 --no-dependencies
 # Test command as presented in the NetLLM repository
-# Note that you will need the model checkpoint downloaded separately, please see instructions in the vp repository
-python run_old.py --test --test-dataset Jin2022 --his-window 10 --fut-window 20 --plm-type llama --plm-size base --epochs 40 --bs 1 --lr 0.0002 --grad-accum-steps 32 --device cuda:0 --steps-per-valid 5000 --save-checkpoint-per-epoch 1 --rank 32 --scheduled-sampling --model-path data/ft_plms/llama_base_low_rank/freeze_plm_False/Jin2022/5Hz/his_10_fut_20_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_scheduled_sampling_True/checkpoint/epoch39
-
+# Note the updated command to use the new run_plm.py script and the path to the self-trained model checkpoint
+python run_plm.py --test --test-dataset Jin2022 --his-window 10 --fut-window 20 --plm-type llama --plm-size base --epochs 40 --bs 1 --lr 0.0002 --grad-accum-steps 32 --device cuda:0 --steps-per-valid 5000 --save-checkpoint-per-epoch 1 --rank 32 --scheduled-sampling --model-path data/ft_plms/llama_base_low_rank/freeze_plm_False/Jin2022/5Hz/his_10_fut_20_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_scheduled_sampling_True/best_model
 
 # Copy files back to local
 # rsync -av --progress -e "ssh -A aarneris@pangolin.it.helsinki.fi ssh" aarneris@turso.cs.helsinki.fi:/wrk-vakka/users/aarneris/NetLLM/NetLLM/viewport_prediction/data/results/llama_base/ .
