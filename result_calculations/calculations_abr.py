@@ -61,6 +61,7 @@ def calculate_abr_result(input_filepath, output_filepath):
     paper_values = f"mean: {results['reward']['mean']} interval size: {results['reward']['interval_size']}"
     
     f = open(f"{output_filepath}/paper_values.txt", "w")
+    f.write(paper_values)
     
     
     
