@@ -47,7 +47,7 @@ class NeuralObsWrapper(ObservationWrapper):
                 edge_space=Discrete(1)),
             'dag_ptr': Sequence(Discrete(1)),
             'stage_mask': Sequence(Discrete(2)),
-            'exec_mask': Sequence(MultiBinary(self.num_executors))
+            'exec_mask': Sequence(MultiBinary(int(self.num_executors)))
         })
 
 
