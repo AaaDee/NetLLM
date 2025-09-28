@@ -221,7 +221,7 @@ def run(args):
     # If args.device == args.device_out == args.device_mid (if not None), everything will be the same as using only one device.
     # plm, *_ = load_plm(args.plm_type, os.path.join(PLM_DIR, args.plm_type, args.plm_size), 
     #                    device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
-    plm, *_ = load_plm(args.plm_type, os.path.join(PLM_DIR, 'tinyllama'), 
+    plm, *_ = load_plm(args.plm_type, args.model_dir, 
                        device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
 
     if args.plm_type != 'llama':
