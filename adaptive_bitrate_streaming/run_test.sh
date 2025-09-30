@@ -13,7 +13,7 @@ bash Miniconda3-latest-Linux-x86_64.sh -u -b
 
 cd /turso/wrk-vakka/users/aarneris/NetLLM/NetLLM/adaptive_bitrate_streaming
 conda env create -f environment.yaml
-conda activate vp_netllm
+conda activate abr_netllm
 
 pip install -r requirements.txt
 # Has to be installed separately due to a dependency conflict
