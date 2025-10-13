@@ -7,10 +7,8 @@
 #SBATCH -G1
 #SBATCH --mem-per-cpu=8000
 #SBATCH --time=168:00:00
-#SBATCH --chdir=/wrk
 
-
-### Finetunes the adaptive bitrate streaming model
+### Finetunes the cjs model
 cd /wrk/users/aarneris/NetLLM
 
 ### Install Anaconda to manage conda environments (if necessary)
