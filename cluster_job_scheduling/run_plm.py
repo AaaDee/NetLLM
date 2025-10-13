@@ -22,9 +22,10 @@ from plm_special.models import OfflineRLPolicy, peft_model, EncoderNetwork, UseS
 from plm_special.utils import load_plm, ConsoleLogger, set_random_seed
 
 
+_base_dir = '' if 'cluster_job_scheduling' in os.getcwd() else 'cluster_job_scheduling/'
 PLM_TYPES = ['gpt2', 'llama', 't5-lm', 'llama_random']
 PLM_SIZES = ['small', 'base', 'large', 'xl', 'xll', 'tiny']
-PLM_DIR = '../../downloaded_plms' if 'cluster_job_scheduling' in os.getcwd() else '../downloaded_plms'
+PLM_DIR = _base_dir + ('../../downloaded_plms' if 'cluster_job_scheduling' in _base_dir else '../downloaded_plms')
 PLM_FT_DIR = 'artifacts/ft_plms'
 RESULTS_DIR = 'artifacts/results/tpch' if 'cluster_job_scheduling' not in os.getcwd() else 'artifacts/results/tpch'
 PLM_EMBED_SIZES = {
@@ -221,16 +222,22 @@ def run(args):
     # If args.device == args.device_out == args.device_mid (if not None), everything will be the same as using only one device.
     # plm, *_ = load_plm(args.plm_type, os.path.join(PLM_DIR, args.plm_type, args.plm_size), 
     #                    device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
-    plm, *_ = load_plm(args.plm_type, args.model_dir, 
-                       device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
+    
+    if args.train:
+        plm, *_ = load_plm(args.plm_type, args.model_dir, 
+                        device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
+    else:
+        plm, *_ = load_plm(args.plm_type, os.path.join(PLM_DIR, args.plm_type, args.plm_size), 
+                        device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
+    
 
     if args.plm_type != 'llama':
         plm = plm.to(args.device)
     
     if args.rank != -1:
         plm = peft_model(plm, args.plm_type, rank=args.rank)
-
-    # 5.2 create state encoder
+    
+# 5.2 create state encoder
     if args.pt_encoder_config is not None:
         cfg = load(filename=args.pt_encoder_config)
         agent_cfg = cfg['agent']
@@ -306,6 +313,7 @@ if __name__ == '__main__':
     parser.add_argument('--plm-type', type=str, default='llama')
     parser.add_argument('--plm-size', type=str, default='base')
     parser.add_argument('--rank', type=int, help='rank of low rank matrices training. if set to -1, low rank will not be enabled', default=128)
+    parser.add_argument('--plm-dir', type=str, default='llama')
     # state encoder settings
     parser.add_argument('--pt-encoder-config', help='config file of pretrained state encoder. if not specified, create a new state encoder')
     parser.add_argument('--state-feature-dim', type=int, help='feature dim of the state encoder')
