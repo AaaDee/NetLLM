@@ -1,6 +1,15 @@
+#!/bin/bash
+#SBATCH --job-name=viewport-testing
+#SBATCH -o viewport-testing-%J.txt
+#SBATCH -M ukko
+#SBATCH -p gpu
+#SBATCH --cpus-per-gpu=2
+#SBATCH -G1
+#SBATCH --mem-per-cpu=8000
+#SBATCH --time=48:00:00
+
 ### Runs the viewport prediction test code with a self-trained llm model checkpoint
 
-srun --interactive -c4 --mem=4G -t04:00:00 -pgpu-oversub -M ukko --pty bash
 cd /turso/wrk-vakka/users/aarneris/NetLLM
 
 ### Install Anaconda to manage conda environments (if necessary)
