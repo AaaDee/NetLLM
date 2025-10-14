@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=abr-training
-#SBATCH -o abr-training-%J.txt
+#SBATCH -o abr-training-lm4-%J.txt
 #SBATCH -M ukko
 #SBATCH -p gpu
 #SBATCH --cpus-per-gpu=2
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 pip install huggingface-hub==0.23.0 --no-dependencies
 
 # Run the training from start
-python run_plm.py --adapt --grad-accum-steps 32 --plm-type llama --plm-size base --rank 128 --device cuda:0 --lr 0.0001 --warmup-steps 2000 --num-epochs 80 --eval-per-epoch 2 --model-dir ../../llama4/Llama-4-Scout-17B-16E
+python run_plm.py --adapt --grad-accum-steps 32 --plm-type llama4 --plm-size base --rank 128 --device cuda:0 --lr 0.0001 --warmup-steps 2000 --num-epochs 80 --eval-per-epoch 2 --plm-path ../../llama4/Llama-4-Scout-17B-16E
  
 
 # Run interactive

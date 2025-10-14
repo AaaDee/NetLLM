@@ -252,8 +252,13 @@ def run(args):
     # For data/modules near the output side, we use args.device_out.
     # For data/modules lying in the middle, we use args.device_mid (it can be None). 
     # If args.device == args.device_out == args.device_mid (if not None), everything will be the same as using only one device.
-    plm, tokenizer, _ = load_plm(args.plm_type, os.path.join(cfg.plms_dir, args.plm_type, args.plm_size), plm_size=args.plm_size, 
-                                     device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
+
+    if (args.plm_path is not None):
+        plm, tokenizer, _ = load_plm(args.plm_type, args.plm_path, plm_size=args.plm_size, 
+                                        device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
+    else:
+        plm, tokenizer, _ = load_plm(args.plm_type, os.path.join(cfg.plms_dir, args.plm_type, args.plm_size), plm_size=args.plm_size, 
+                                        device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
     if (args.plm_type == 'opt' or args.plm_type == 'gpt2') and args.plm_size!= 'large':  # other plm can simply be loaded on one device
         plm = plm.to(args.device)
     
@@ -325,6 +330,7 @@ if __name__ == '__main__':
     parser.add_argument('--test', action="store_true", help='test llm.')
     parser.add_argument('--plm-type', action="store", dest='plm_type', help='type of plm.', default='t5-lm')
     parser.add_argument('--plm-size', action="store", dest='plm_size', help='size of plm.', default='base')
+    parser.add_argument('--plm-path', action="store", dest='plm_path', help='path to plm')
     parser.add_argument('--model-path', action="store", dest='model_path', type=str, help='(Optional) The directory of model weights to be loaded for testing.')
     parser.add_argument('--device', action='store', dest='device', help='the device (cuda or cpu) to run experiment.')
     parser.add_argument('--device-out', action='store', dest='device_out', help='the device (cuda or cpu) to place the split of model near the output.')

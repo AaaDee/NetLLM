@@ -7,7 +7,7 @@ import os
 class Config:
     _base_dir = '' if 'viewport_prediction' in os.getcwd() else 'viewport_prediction/'
     dataset_list = ['Wu2017', 'Jin2022']
-    plm_types = ['gpt2', 'llama', 'llava', 't5-lm', 'opt', 'mistral']
+    plm_types = ['gpt2', 'llama', 'llama4', 'llava', 't5-lm', 'opt', 'mistral']
     plm_sizes = ['xxs', 'xs', 'small', 'base', 'large', 'xl', 'xxl']  # note that the actual size of plm is dependent on the type of plm. 
                                                          # for example, for llama, 'base' is 7b, while for gpt2, 'base' is 340M. you can specify it yourself.
 
