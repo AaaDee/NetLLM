@@ -19,10 +19,11 @@ from transformers import BertConfig, BertTokenizer, BertForNextSentencePredictio
                          OPTConfig, OPTForCausalLM, \
                          ElectraConfig, ElectraForMaskedLM, ElectraTokenizer, \
                          GPTJConfig, GPTJForCausalLM, \
-                         LlamaConfig, LlamaTokenizer, LlamaModel, LlamaForCausalLM, AutoTokenizer, LlamaTokenizerFast, \
+                         LlamaConfig, Llama4TextConfig, LlamaTokenizer, LlamaModel, LlamaForCausalLM, AutoTokenizer, LlamaTokenizerFast, \
                          MistralConfig, MistralForCausalLM
 from models.gpt2 import GPT2NetworkingHeadModel
 from models.llama import LlamaNetworkingHeadModel
+from models.llama4 import Llama4NetworkingHeadModel
 from models.mistral import MistralNetworkingHeadModel
 from models.opt import OptNetworkingHeadModel
                         
@@ -84,6 +85,11 @@ _MODEL_CLASSES = {
         "config": LlamaConfig,
         "tokenizer": LlamaTokenizer,
         "model": LlamaNetworkingHeadModel,
+    }),
+      "llama4": ModelClass(**{
+        "config": Llama4TextConfig,
+        "tokenizer": LlamaTokenizer,
+        "model": Llama4NetworkingHeadModel,
     }),
     "mistral": ModelClass(**{
         "config": MistralConfig,
