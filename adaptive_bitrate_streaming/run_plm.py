@@ -172,8 +172,13 @@ def run(args):
     # For data/modules near the output side, we use args.device_out.
     # For data/modules lying in the middle, we use args.device_mid (it can be None). 
     # If args.device == args.device_out == args.device_mid (if not None), everything will be the same as using only one device.
-    plm, *_ = load_plm(args.plm_type, os.path.join(cfg.plm_dir, args.plm_type, args.plm_size), 
-                       device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
+    
+    if (args.plm_path is not None):
+        plm, *_, _ = load_plm(args.plm_type, args.plm_path, plm_size=args.plm_size, 
+                                        device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
+    else:
+        plm, *_, _ = load_plm(args.plm_type, os.path.join(cfg.plms_dir, args.plm_type, args.plm_size), plm_size=args.plm_size, 
+                                        device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
 
     if args.plm_type != 'llama':
         plm = plm.to(args.device)
@@ -244,6 +249,7 @@ if __name__ == '__main__':
     # plm settings
     parser.add_argument('--plm-type', type=str, default='gpt2')
     parser.add_argument('--plm-size', type=str, default='base')
+    parser.add_argument('--plm-path', type=str,)
     parser.add_argument('--rank', type=int, help='rank of low-rank matrices. if set to -1, low-rank matrices will not be enabled', default=-1)
     # state encoder settings
     parser.add_argument('--state-feature-dim', type=int, help='feature dim of the state encoder', default=256)

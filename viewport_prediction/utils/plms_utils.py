@@ -10,7 +10,7 @@ from collections import namedtuple
 from yacs.config import CfgNode
 from transformers.modeling_utils import PreTrainedModel
 from transformers.tokenization_utils import PreTrainedTokenizer
-from transformers import BertConfig, BertTokenizer, BertForNextSentencePrediction, BertForMaskedLM, BertLMHeadModel,\
+from transformers import AutoTokenizer, BertConfig, BertTokenizer, BertForNextSentencePrediction, BertForMaskedLM, BertLMHeadModel,\
                          RobertaConfig, RobertaTokenizer, RobertaModel, RobertaForCausalLM, \
                          AlbertTokenizer, AlbertConfig, AlbertModel, AlbertForMaskedLM, \
                          T5Config, T5Tokenizer, T5ForConditionalGeneration, \
@@ -20,7 +20,8 @@ from transformers import BertConfig, BertTokenizer, BertForNextSentencePredictio
                          ElectraConfig, ElectraForMaskedLM, ElectraTokenizer, \
                          GPTJConfig, GPTJForCausalLM, \
                          LlamaConfig, Llama4TextConfig, LlamaTokenizer, LlamaModel, LlamaForCausalLM, AutoTokenizer, LlamaTokenizerFast, \
-                         MistralConfig, MistralForCausalLM
+                         MistralConfig, MistralForCausalLM, BitsAndBytesConfig, AutoModelForCausalLM
+import torch
 from models.gpt2 import GPT2NetworkingHeadModel
 from models.llama import LlamaNetworkingHeadModel
 from models.llama4 import Llama4NetworkingHeadModel
@@ -83,7 +84,7 @@ _MODEL_CLASSES = {
     }),
     "llama": ModelClass(**{
         "config": LlamaConfig,
-        "tokenizer": LlamaTokenizer,
+        "tokenizer": AutoTokenizer,
         "model": LlamaNetworkingHeadModel,
     }),
       "llama4": ModelClass(**{
@@ -161,7 +162,9 @@ def load_plm(model_name, model_path, specials_to_add = None, **kwargs):
     if 'llama' in model_name and device_input_side is not None and device_output_side is not None:
         device_middle_side = kwargs.pop('device_middle_side', None)
         device_map = create_device_map_for_llama(device_input_side, device_output_side, device_middle_side)
-        model = model_class.model.from_pretrained(model_path, config=model_config, device_map=device_map)
+        print('loading llm')
+        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
+        model = model_class.model.from_pretrained(model_path, config=model_config,device_map=device_map,quantization_config=quantization_config)
     else:
         model = model_class.model.from_pretrained(model_path, config=model_config)
     
