@@ -254,10 +254,10 @@ def run(args):
     # If args.device == args.device_out == args.device_mid (if not None), everything will be the same as using only one device.
 
     if (args.plm_path is not None):
-        plm, tokenizer, _ = load_plm(args.plm_type, args.plm_path, plm_size=args.plm_size, 
+        plm, tokenizer, config = load_plm(args.plm_type, args.plm_path, plm_size=args.plm_size, 
                                         device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
     else:
-        plm, tokenizer, _ = load_plm(args.plm_type, os.path.join(cfg.plms_dir, args.plm_type, args.plm_size), plm_size=args.plm_size, 
+        plm, tokenizer, config = load_plm(args.plm_type, os.path.join(cfg.plms_dir, args.plm_type, args.plm_size), plm_size=args.plm_size, 
                                         device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
     if (args.plm_type == 'opt' or args.plm_type == 'gpt2') and args.plm_size!= 'large':  # other plm can simply be loaded on one device
         plm = plm.to(args.device)
@@ -266,12 +266,13 @@ def run(args):
         plm = peft_model(plm, args.plm_type, args.rank)
         
     # set up networking head
-    input_dim = plm.hidden_size
+    input_dim = config.hidden_size
     out_dim = 3  # = the number of viewport coordinates
     if args.plm_type == 'opt' and args.plm_size == 'xxs':
         networking_head = NetworkingHead(input_dim=512, output_dim=out_dim, fut_window=args.fut_window).to(args.device_out)
     else:
         networking_head = NetworkingHead(input_dim=input_dim, output_dim=out_dim, fut_window=args.fut_window).to(args.device_out)
+
     plm.set_networking_head(networking_head)
     print('PLM model architecture:')
     print(plm)

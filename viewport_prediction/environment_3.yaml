@@ -1,4 +1,4 @@
-name: vp_netllm_4
+name: vp_netllm_3
 channels:
   - defaults
 dependencies:
@@ -67,11 +67,13 @@ dependencies:
       - packaging==25.0
       - peft==0.17.1
       - prettytable==3.16.0
+      - protobuf==6.33.0
       - psutil==7.1.0
       - pyyaml==6.0.3
       - regex==2025.9.18
       - requests==2.32.5
       - safetensors==0.6.2
+      - sentencepiece==0.2.1
       - sympy==1.14.0
       - tokenizers==0.22.1
       - torch==2.8.0
@@ -82,4 +84,4 @@ dependencies:
       - urllib3==2.5.0
       - wcwidth==0.2.14
       - yacs==0.1.8
-prefix: /home/aarne/miniconda3/envs/vp_netllm_4
+prefix: /home/aarne/miniconda3/envs/vp_netllm_3

@@ -27,7 +27,7 @@ class Config:
     exp_pools_dir = artifacts_dir + 'exp_pools/'
 
     # plm special
-    plm_types = ['gpt2', 'llama', 'llava', 't5-lm', 'opt', 'mistral']
+    plm_types = ['gpt2', 'llama', 'llama4', 'llava', 't5-lm', 'opt', 'mistral']
     plm_sizes = ['xxs', 'xs', 'small', 'base', 'large', 'xl', 'xxl']  # note that the actual size of plm is dependent on the type of plm. 
                                                          # for example, for llama, 'base' is 7b, while for gpt2, 'base' is 340M. you can specify it yourself.
     plm_dir = _base_dir + ('../../downloaded_plms' if 'adaptive_bitrate_streaming' in _base_dir else '../downloaded_plms')

@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=abr-training-lm4
-#SBATCH -o abr-training-lm4-%J.txt
+#SBATCH --job-name=abr-training-lm3
+#SBATCH -o abr-training-lm3-%J.txt
 #SBATCH -M ukko
 #SBATCH -p gpu
 #SBATCH --cpus-per-gpu=2
@@ -24,11 +24,12 @@ bash Miniconda3-latest-Linux-x86_64.sh -u -b
 . bin/activate
 
 cd /turso/wrk-vakka/users/aarneris/NetLLM/NetLLM/adaptive_bitrate_streaming
-conda env create -f environment_4.yaml
-conda activate abr_netllm_4
+conda env create -f environment_3.yaml
+conda activate abr_netllm_3
 
 # Run the training from start
-python run_plm.py --adapt --grad-accum-steps 32 --plm-type llama4 --plm-size base --rank 128 --device cuda:0 --lr 0.0001 --warmup-steps 2000 --num-epochs 80 --eval-per-epoch 2 --plm-path ../../llama4/Llama-4-Scout-17B-16E
+python run_plm.py --adapt --grad-accum-steps 32 --plm-type llama --plm-size base --rank 128 --device cuda:0 --lr 0.0001 --warmup-steps 2000 --num-epochs 80 --eval-per-epoch 2 --plm-path ../../Llama-3.1-8B
+
  
 
 # Run interactive

@@ -5,6 +5,7 @@ import torch
 import torch.nn as nn
 import torch.utils.checkpoint
 from transformers.models.llama.modeling_llama import LlamaPreTrainedModel, LlamaDecoderLayer, LlamaRMSNorm, LlamaConfig
+from transformers.models.llama4.modeling_llama4 import Llama4TextDecoderLayer
 from transformers.modeling_outputs import BaseModelOutputWithPast
 from transformers.utils import add_start_docstrings, logging
 
@@ -49,7 +50,7 @@ def _expand_mask(mask: torch.Tensor, dtype: torch.dtype, tgt_len: Optional[int] 
 @add_start_docstrings(
     "The bare LLaMA Model outputting raw hidden-states without any specific head on top."
 )
-class LlamaModel(LlamaPreTrainedModel):
+class Llama4Model(LlamaPreTrainedModel):
     """
     The customized Llama model.
     The difference between this LlamaModel and the default Huggingface version:
@@ -64,7 +65,7 @@ class LlamaModel(LlamaPreTrainedModel):
         self.vocab_size = config.vocab_size
 
         self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size, self.padding_idx)
-        self.layers = nn.ModuleList([LlamaDecoderLayer(config, idx) for idx in range(config.num_hidden_layers)])
+        self.layers = nn.ModuleList([Llama4TextDecoderLayer(config, idx) for idx in range(config.num_hidden_layers)])
         self.norm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.layer_indices = list(range(len(self.layers)))
 
