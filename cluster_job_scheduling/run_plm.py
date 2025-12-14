@@ -223,11 +223,13 @@ def run(args):
     # plm, *_ = load_plm(args.plm_type, os.path.join(PLM_DIR, args.plm_type, args.plm_size), 
     #                    device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
     
+    print("args", args)
+    print(args.plm_dir)
     if args.train:
         plm, *_ = load_plm(args.plm_type, args.model_dir, 
                         device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
     else:
-        plm, *_ = load_plm(args.plm_type, os.path.join(PLM_DIR, args.plm_type, args.plm_size), 
+        plm, *_ = load_plm(args.plm_type, args.plm_dir, 
                         device_input_side=args.device, device_output_side=args.device_out, device_middle_side=args.device_mid)
     
 

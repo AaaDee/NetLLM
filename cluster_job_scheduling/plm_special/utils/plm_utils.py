@@ -10,7 +10,7 @@ from collections import namedtuple
 from yacs.config import CfgNode
 from transformers.modeling_utils import PreTrainedModel
 from transformers.tokenization_utils import PreTrainedTokenizer
-from transformers import BertConfig, BertTokenizer, BertLMHeadModel,\
+from transformers import AutoTokenizer, BertConfig, BertTokenizer, BertLMHeadModel,\
                          RobertaConfig, RobertaTokenizer, RobertaForCausalLM, \
                          AlbertTokenizer, AlbertConfig, AlbertForMaskedLM, \
                          T5Config, T5Tokenizer, T5ForConditionalGeneration, \
@@ -79,7 +79,7 @@ _MODEL_CLASSES = {
     }),
     "llama": ModelClass(**{
         "config": LlamaConfig,
-        "tokenizer": LlamaTokenizer,
+       "tokenizer": AutoTokenizer,
         "model": LlamaModel,
     }),
 }
@@ -123,6 +123,7 @@ def load_plm(model_name, model_path, specials_to_add = None, **kwargs):
         :obj:`tokenizer`: The pretrained tokenizer.
         :obj:`model_config`: The config of the pretrained model.
     """
+    print("path:", model_path)
     model_class = get_model_class(plm_type = model_name)
     model_config = model_class.config.from_pretrained(model_path)
     # you can change huggingface model_config here

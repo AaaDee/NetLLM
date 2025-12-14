@@ -250,7 +250,7 @@ def run(args):
     # args.device_out and args.device_mid are used used for model parallelism (currently only necessary for llama) 
     # For data/modules near the input side, we use args.device.
     # For data/modules near the output side, we use args.device_out.
-    # For data/modules lying in the middle, we use args.device_mid (it can be None). 
+    # For data/modules lying in the middle, we puse args.device_mid (it can be None). 
     # If args.device == args.device_out == args.device_mid (if not None), everything will be the same as using only one device.
 
     if (args.plm_path is not None):
