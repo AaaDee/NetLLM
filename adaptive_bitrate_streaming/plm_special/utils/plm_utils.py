@@ -10,7 +10,7 @@ from collections import namedtuple
 from yacs.config import CfgNode
 from transformers.modeling_utils import PreTrainedModel
 from transformers.tokenization_utils import PreTrainedTokenizer
-from transformers import BertConfig, BertTokenizer, BertLMHeadModel,\
+from transformers import AutoTokenizer, BertConfig, BertTokenizer, BertLMHeadModel,\
                          RobertaConfig, RobertaTokenizer, RobertaForCausalLM, \
                          AlbertTokenizer, AlbertConfig, AlbertForMaskedLM, \
                          T5Config, T5Tokenizer, T5ForConditionalGeneration, \
@@ -84,7 +84,7 @@ _MODEL_CLASSES = {
     }),
     "llama": ModelClass(**{
         "config": LlamaConfig,
-        "tokenizer": LlamaTokenizer,
+        "tokenizer": AutoTokenizer,
         "model": LlamaModel,
     }),
     "mistral": ModelClass(**{
