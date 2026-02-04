@@ -43,5 +43,5 @@ python run_plm.py \
     --K 20 \
     --gamma 1.0 \
     --lr 0.0001 \
-    --model-dir ../../Llama-3.1-8B\
+    --model-dir ../../Llama-3.1-8B \
     --num-iters 40 

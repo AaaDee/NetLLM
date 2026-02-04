@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Sep  7 15:48:55 2025
-
-@author: aarne
+Detailed calculations for the VP task, which use the raw data instead of the preprocessed files
 """
 
 # Detailed vp
