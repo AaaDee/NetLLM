@@ -35,17 +35,12 @@ def calculate_vp_result(input_filepath, output_filepath):
     f.write(paper_values)
 
 
-input_path = '../viewport_prediction/results/llama_base/freeze_plm_False/Jin2022/5Hz/his_10_fut_20_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_teacher_forcing_False_scheduled_sampling_True_results.csv'
+input_path = './data/checkpoint/VP/his_10_fut_20_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_teacher_forcing_False_scheduled_sampling_True_results.csv'
 output_path = '../results/checkpoint/VP'
 
 calculate_vp_result(input_path, output_path)
 
-input_path = '../viewport_prediction/results/llama_base_low_rank/freeze_plm_False/Jin2022/5Hz/his_10_fut_20_axes_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_scheduled_sampling_True_results.csv'
+input_path = './data/trained/VP/his_10_fut_20_axes_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_scheduled_sampling_True_results.csv'
 output_path = '../results/trained/VP'
-
-calculate_vp_result(input_path, output_path)
-
-input_path = '../viewport_prediction/results/llama_4/freeze_plm_False/Jin2022/5Hz/his_10_fut_20_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_teacher_forcing_False_scheduled_sampling_True_results.csv'
-output_path = '../results/llama4/VP'
 
 calculate_vp_result(input_path, output_path)
