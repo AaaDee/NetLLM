@@ -65,18 +65,18 @@ def calculate_abr_result(input_filepath, output_filepath):
     
     
     
-input_path = '../adaptive_bitrate_streaming/artifacts/checkpoint/results/fcc-test_video1/trace_num_100_fixed_True/llama_base/early_stop_-1_rank_128_w_20_gamma_1.0_tgt_scale_1.0_seed_100003'
+input_path = './data/checkpoint/ABR/early_stop_-1_rank_128_w_20_gamma_1.0_tgt_scale_1.0_seed_100003'
 output_path = '../results/checkpoint/ABR'
 
 calculate_abr_result(input_path, output_path)
 
-input_path = '../adaptive_bitrate_streaming/artifacts/trained/results/fcc-test_video1/trace_num_100_fixed_True/llama_base/early_stop_-1_rank_128_w_20_gamma_1.0_tgt_scale_1.0_seed_100003'
+input_path = './data/trained/ABR/early_stop_-1_rank_128_w_20_gamma_1.0_tgt_scale_1.0_seed_100003'
 output_path = '../results/trained/ABR'
 
 calculate_abr_result(input_path, output_path)
 
-input_path = '../adaptive_bitrate_streaming/artifacts/llama4/results/fcc-test_video1/trace_num_100_fixed_True/llama_base/early_stop_-1_rank_128_w_20_gamma_1.0_tgt_scale_1.0_seed_100003'
-output_path = '../results/llama4/ABR'
+input_path = './data/llama3/ABR/early_stop_-1_rank_128_w_20_gamma_1.0_tgt_scale_1.0_seed_100003'
+output_path = '../results/llama3/ABR'
 
 calculate_abr_result(input_path, output_path)
 
