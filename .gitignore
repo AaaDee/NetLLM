@@ -2,10 +2,9 @@ __pycache__
 .idea
 .vscode
 
-results/
-
 downloaded_plms
 ft_plms
 
 artifacts/
 scripts
+viewport_prediction/results/
