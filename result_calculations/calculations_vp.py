@@ -4,13 +4,6 @@ import re
 import pandas as pd
 import statistics
 import scipy.stats as stats
-    # create output dir
-#    if not os.path.exists(output_filepath):
-#        os.makedirs(output_filepath)
-        
-   ### Read data
-
-
 
 def calculate_vp_result(input_filepath, output_filepath):
     if not os.path.exists(output_filepath):
