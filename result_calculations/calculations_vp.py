@@ -44,3 +44,8 @@ input_path = './data/trained/VP/his_10_fut_20_axes_ss_15_epochs_40_bs_32_lr_0.00
 output_path = '../results/trained/VP'
 
 calculate_vp_result(input_path, output_path)
+
+input_path = './data/llama3/VP/his_10_fut_20_axes_ss_15_epochs_40_bs_32_lr_0.0002_seed_1_rank_32_scheduled_sampling_True_results.csv'
+output_path = '../results/llama3/VP'
+
+calculate_vp_result(input_path, output_path)
