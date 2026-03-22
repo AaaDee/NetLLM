@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import scipy.stats as stats
 import os
+import statistics
 
 
 def calculate_abr_result(input_filepath, output_filepath):
@@ -10,10 +11,7 @@ def calculate_abr_result(input_filepath, output_filepath):
     if not os.path.exists(output_filepath):
         os.makedirs(output_filepath)
         
-   ### Read data
-
-    
-    
+    ### Read data
     folder_path = Path(input_path)
     
     dfs = []
@@ -37,6 +35,7 @@ def calculate_abr_result(input_filepath, output_filepath):
         mean = np.mean(data)
         sem = stats.sem(data)
         n = len(data)
+        sd = statistics.stdev(data)
     
         # Using 95% confidence
         lower_cutoff = stats.t.ppf(0.025, n - 1, loc = mean, scale = sem)
@@ -44,9 +43,12 @@ def calculate_abr_result(input_filepath, output_filepath):
        
         results[col] = {
             'mean': mean,
+            'sem': sem,
+            'sd': sd,
             'ci_lower': lower_cutoff,
             'ci_upper': upper_cutoff,
-            'interval_size': upper_cutoff - mean
+            'interval_size': upper_cutoff - mean,
+            'n': n
         }
     
     ci_df = pd.DataFrame(results).T
@@ -58,8 +60,7 @@ def calculate_abr_result(input_filepath, output_filepath):
     
     csv_path = f"{output_filepath}/results.csv"
     ci_df.to_csv(csv_path)
-    paper_values = f"mean: {results['reward']['mean']} interval size: {results['reward']['interval_size']}"
-    
+    paper_values = f"mean: {results['reward']['mean']} interval size: {results['reward']['interval_size']}, sd: {results['reward']['sd']}, n: {results['reward']['n']},"
     f = open(f"{output_filepath}/paper_values.txt", "w")
     f.write(paper_values)
     

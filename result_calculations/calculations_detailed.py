@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Sep  7 15:48:55 2025
-
-@author: aarne
-"""
-
 
 # Investigative calculations to read the VP results on the level of individual points
 # For the reported results, see 'calculations_vp.py', which uses the pre-summarised data

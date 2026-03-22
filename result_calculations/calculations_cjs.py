@@ -20,6 +20,7 @@ def calculate_cjs(input_path, output_path):
     mean = np.mean(data)
     sem = stats.sem(data)
     n = len(data)
+    sd = statistics.stdev(data)
 
     # Using 95% confidence
     lower_cutoff = stats.t.ppf(0.025, n - 1, loc = mean, scale = sem)
@@ -27,12 +28,14 @@ def calculate_cjs(input_path, output_path):
 
     results = {
         'mean': mean,
+        'sd': sd,
         'ci_lower': lower_cutoff,
         'ci_upper': upper_cutoff,
-        'interval_size': upper_cutoff - mean
+        'interval_size': upper_cutoff - mean,
+        'n': n
     }
 
-    paper_values = f"mean: {results['mean']} interval size: {results['interval_size']}"
+    paper_values = f"mean: {results['mean']} interval size: {results['interval_size']}, sd: {sd}, n: {n}"
 
     f = open(f"{output_path}/paper_values.txt", "w")
     f.write(paper_values)

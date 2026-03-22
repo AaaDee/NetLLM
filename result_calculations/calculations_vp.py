@@ -16,6 +16,7 @@ def calculate_vp_result(input_filepath, output_filepath):
     mean = statistics.mean(df['mae'])
     sem = stats.sem(df['mae'])
     n = len(df['mae'])
+    sd = statistics.stdev(df['mae'])
     
     # Using 95% confidence
     lower_cutoff = stats.t.ppf(0.025, n - 1, loc = mean, scale = sem)
@@ -23,7 +24,7 @@ def calculate_vp_result(input_filepath, output_filepath):
     
     interval_size = upper_cutoff - mean
     
-    paper_values = f"mean: {mean} interval size: {interval_size}"
+    paper_values = f"mean: {mean} interval size: {interval_size}, sd: {sd}, n: {n}"
     f = open(f"{output_filepath}/paper_values.txt", "w")
     f.write(paper_values)
 
