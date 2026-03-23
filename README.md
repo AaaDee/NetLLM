@@ -17,3 +17,15 @@ In addition to the original source code released by the NetLLM authors, this rep
 Following the original NetLLM folder structure, the code for running and testing the three different tasks studied can be found in their respective folders. The only exception is the calculation of results, which is contained in the `result_calculations`
 
 For additional documentation of the source code, please refer to the material provided in the original NetLLm repository
+
+
+## Running the scripts
+
+The scripts associated with running each of the scripts are contained in their respective folders. The scripts are named in the following manner
+
+- `run_training.sh` trains the model from the base model
+  - similarly for `run_traininig_lm3.sh` for the Llama 3 in the llama3 branch
+- `run_test.sh` tests the model against a test dataset, typically against a model checkpoint
+  - `run_test_trained.sh` runs the test against a self-trained model
+
+Due to a variety of hardware used, some scripts assume the presence of a SLURM-type batching system, whereas some are intended to be run on a machine running a CUDA Docker image.
