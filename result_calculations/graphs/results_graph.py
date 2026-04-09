@@ -11,7 +11,8 @@ tasks = {
         'repro1': 0.98,
         'repro1_err': 0.03,
         'repro2': 0.75,
-        'repro2_err': 0.04
+        'repro2_err': 0.04,
+        'labels': ['Original', 'Reproduction (Checkpoint)', 'Reproduction (Fine-tuning)']
     },
     'CJS': {
         'title': 'Cluster Job Scheduling (CJS)',
@@ -20,7 +21,8 @@ tasks = {
         'repro1': None,  
         'repro1_err': 0,
         'repro2': 45.51, 
-        'repro2_err': 5.95
+        'repro2_err': 5.95,
+        'labels': ['Original', 'Reproduction (Checkpoint)', 'Reproduction (Fine-tuning)']
     },
     'VP': {
         'title': 'Viewport Prediction (VP)',
@@ -29,19 +31,49 @@ tasks = {
         'repro1': 12.86,
         'repro1_err': 1.31,
         'repro2': 11.51, 
-        'repro2_err': 1.16
+        'repro2_err': 1.16,
+        'labels': ['Original', 'Reproduction (Checkpoint)', 'Reproduction (Fine-tuning)']
+    },
+        'ABR_3': {
+        'title': 'Adaptive Bitrate Streaming (ABR)',
+        'ylabel': 'Quality of Experience (Higher is Better)',
+        'original': 1.00,
+        'repro1': 0.75,
+        'repro1_err': 0.04,
+        'repro2': 0.76,
+        'repro2_err': 0.04,
+        'labels': ['Original', 'Llama2', 'Llama3']
+    },
+    'CJS_3': {
+        'title': 'Cluster Job Scheduling (CJS)',
+        'ylabel': 'Job Completion Time, Seconds (Lower is Better)',
+        'original': 48.08,
+        'repro1': 45.51,  
+        'repro1_err': 5.95,
+        'repro2': 53.92, 
+        'repro2_err': 6.49,
+        'labels': ['Original', 'Llama2', 'Llama3']
+    },
+    'VP_3': {
+        'title': 'Viewport Prediction (VP)',
+        'ylabel': 'Mean Absolute Error, Degrees (Lower is Better)',
+        'original': 11.88,
+        'repro1': 11.51,
+        'repro1_err': 1.16,
+        'repro2': 12.48, 
+        'repro2_err': 0.55,
+        'labels': ['Original', 'Llama 2', 'Llama 3']
     }
 }
 
 def create_task_chart(task_name, data):
-    labels = ['Original', 'Reproduction (checkpoint)', 'Reproduction (fine-tuning)']
     means = [data['original'], data['repro1'], data['repro2']]
     errors = [0, data['repro1_err'], data['repro2_err']]
     
 
     # Add check for None
     valid_indices = [i for i, x in enumerate(means) if x is not None]
-    plot_labels = [labels[i] for i in valid_indices]
+    plot_labels = [data['labels'][i] for i in valid_indices]
     plot_means = [means[i] for i in valid_indices]
     plot_errors = [errors[i] for i in valid_indices]
 
@@ -65,7 +97,7 @@ def create_task_chart(task_name, data):
     plt.tight_layout()
     
     # Save the figure
-    filename = f"{task_name}_comparison.png"
+    filename = f"{task_name}_comparison.pdf"
     plt.savefig(filename, dpi=300)
     plt.close()
 
