@@ -4,4 +4,4 @@ This folder contains the scripts to calculate the results in the thesis, and the
 
 For all calculations, the results are saved into the `../results` folder.
 
-`Misc` contains a graph calculation unrelated to the main results.
+`Graphs` contains the scripts used to produce the graphs used in the thesis.

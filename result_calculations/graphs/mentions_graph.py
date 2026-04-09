@@ -10,7 +10,9 @@ data = {
 }
 df = pd.DataFrame(data)
 
-plt.bar(df['Year'], df['Mentions'], color='skyblue', edgecolor='navy')
+color = '#3498db'
+
+plt.bar(df['Year'], df['Mentions'], color=color, edgecolor='black')
 
 plt.xlabel('Year')
 plt.ylabel("Number of Mentions ('LLM')")
